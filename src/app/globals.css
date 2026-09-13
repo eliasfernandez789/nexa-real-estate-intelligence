@@ -1,0 +1,201 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Gate every `hover:` utility behind real hover capability, so tapping on
+   touch devices doesn't leave hover styles stuck until the next tap. */
+@custom-variant hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @slot;
+    }
+  }
+}
+
+:root {
+  /* ---- Base palette (NEXA identity — Listora reference, Dribbble) ---- */
+  --background: #f5f6fb;
+  --foreground: #0b0d12;
+  --muted: #9497a6; /* secondary/tertiary text color */
+  --muted-light: #4b5563;
+  --muted-foreground: var(--muted); /* alias: shadcn primitives read this for their own text-muted-foreground */
+  --surface: #ffffff;
+  --surface-border: #e7e8f0;
+  --surface-border-hover: #d3d5e3;
+  --chip: #f0f1f7;
+  --nav-active: #eef0fe;
+  --secondary-btn: #f0f1f7;
+  --primary-btn: #1c20f9;
+  --primary-btn-border: #1c20f9;
+  --primary-btn-text: #ffffff;
+
+  /* One accent family (electric indigo) for anything actionable. */
+  --ring: #1c20f9;
+  --accent-blue: #3f63d2;
+  --accent-blue-soft: #b2cbea;
+
+  /* Status dots — desaturated so they read as signal, not decoration. */
+  --dot-caliente: #d6493f;
+  --dot-tibio: #c2872a;
+  --dot-frio: #3f63d2;
+
+  --whatsapp: #16a37a;
+  --whatsapp-text: #0f7a5c;
+
+  /* ---- Business status pills (Activo / En Negociación) — unchanged ---- */
+  --estado-activo-bg: #e7f6ee;
+  --estado-activo-text: #16803c;
+  --estado-negociacion-bg: #fef3e2;
+  --estado-negociacion-text: #b4650a;
+
+  /* ---- Semantic system: success / warning / danger / info ----
+     success/warning reuse the existing estado-* values (same meaning).
+     danger and info are new — danger is a REAL red, never reused for
+     business-status amber again. */
+  --success-bg: var(--estado-activo-bg);
+  --success-text: var(--estado-activo-text);
+  --warning-bg: var(--estado-negociacion-bg);
+  --warning-text: var(--estado-negociacion-text);
+  --danger-bg: #fbe9e7;
+  --danger-text: #b23b30;
+  --info-bg: #eaf0fb;
+  --info-text: #2d4f9e;
+
+  /* ---- shadcn/ui primitive tokens, mapped onto NEXA's own palette ----
+     (no separate "shadcn theme" — the primitives consume our tokens) */
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
+  --primary: var(--primary-btn);
+  --primary-foreground: var(--primary-btn-text);
+  --secondary: var(--chip);
+  --secondary-foreground: var(--muted-light);
+  --accent: var(--chip);
+  --accent-foreground: var(--foreground);
+  --destructive: var(--danger-text);
+  --border: var(--surface-border);
+  --input: var(--surface-border);
+  --radius: 0.625rem;
+
+  /* ---- Motion tokens ---- */
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 140ms;
+  --duration-standard: 200ms;
+  --duration-complex: 280ms;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted-light: var(--muted-light);
+  --color-surface: var(--surface);
+  --color-surface-border: var(--surface-border);
+  --color-surface-border-hover: var(--surface-border-hover);
+  --color-chip: var(--chip);
+  --color-nav-active: var(--nav-active);
+  --color-secondary-btn: var(--secondary-btn);
+  --color-primary-btn: var(--primary-btn);
+  --color-primary-btn-border: var(--primary-btn-border);
+  --color-primary-btn-text: var(--primary-btn-text);
+  --color-ring: var(--ring);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-blue-soft: var(--accent-blue-soft);
+  --color-dot-caliente: var(--dot-caliente);
+  --color-dot-tibio: var(--dot-tibio);
+  --color-dot-frio: var(--dot-frio);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-text: var(--whatsapp-text);
+  --color-estado-activo-bg: var(--estado-activo-bg);
+  --color-estado-activo-text: var(--estado-activo-text);
+  --color-estado-negociacion-bg: var(--estado-negociacion-bg);
+  --color-estado-negociacion-text: var(--estado-negociacion-text);
+  --color-success-bg: var(--success-bg);
+  --color-success-text: var(--success-text);
+  --color-warning-bg: var(--warning-bg);
+  --color-warning-text: var(--warning-text);
+  --color-danger-bg: var(--danger-bg);
+  --color-danger-text: var(--danger-text);
+  --color-info-bg: var(--info-bg);
+  --color-info-text: var(--info-text);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-geist-sans);
+
+  /* ---- Typography scale (semantic mapping documented in docs/DESIGN.md) ---- */
+  --text-xs: 0.75rem; /* 12px — caption / metadata */
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem; /* 14px — label / body-small */
+  --text-sm--line-height: 1.25rem;
+  --text-base: 0.9375rem; /* 15px — body */
+  --text-base--line-height: 1.4rem;
+  --text-lg: 1.0625rem; /* 17px — title */
+  --text-lg--line-height: 1.5rem;
+  --text-xl: 1.25rem; /* 20px — heading */
+  --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.5rem; /* 24px — display-small */
+  --text-2xl--line-height: 2rem;
+  --text-3xl: 1.875rem; /* 30px — display */
+  --text-3xl--line-height: 2.25rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans), -apple-system, "Segoe UI", sans-serif;
+    font-size: 14px;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+::selection {
+  background: color-mix(in srgb, var(--ring) 20%, transparent);
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
