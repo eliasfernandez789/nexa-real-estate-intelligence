@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm run test:unit
+
+      - name: Build
+        run: npm run build
+
+      # E2E (Playwright) queda deliberadamente FUERA de este pipeline.
+      # La suite autenticada depende de un login manual una sola vez
+      # (playwright/.auth/user.json, ver e2e/auth.setup.ts) — a propósito,
+      # para nunca automatizar el ingreso de una contraseña real, ni
+      # siquiera vía secret. Correrla sigue siendo un paso local:
+      #   npm run test:e2e:setup   (una vez, login manual)
+      #   npm run test:e2e

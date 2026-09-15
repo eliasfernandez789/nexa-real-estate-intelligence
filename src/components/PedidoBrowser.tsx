@@ -53,24 +53,33 @@ export function PedidoBrowser({
     });
   }, [pedidos, vista, soloOficina]);
 
-  const conteoTemperatura = useMemo(() => {
-    const base: Record<Temperatura, number> = { caliente: 0, tibio: 0, frio: 0 };
-    for (const p of pedidosVista) base[p.temperatura]++;
-    return base;
-  }, [pedidosVista]);
-
-  const pedidosFiltrados = useMemo(() => {
-    const q = busqueda.trim().toLowerCase();
-
-    const filtrados = pedidosVista.filter((p) => {
-      if (temperaturas.size > 0 && !temperaturas.has(p.temperatura)) return false;
-      if (tipos.size > 0 && !p.tipo.split("·").some((t) => tipos.has(t))) return false;
-      if (zonas.size > 0 && !p.zonas.some((z) => zonas.has(z))) return false;
-
+  // Además del scope de vista/oficina, los conteos también respetan el
+  // estado seleccionado: si no lo hicieran, un chip podría mostrar "6" y al
+  // hacer clic dejar la grilla vacía porque esos 6 no están en el estado
+  // actualmente filtrado.
+  const pedidosParaConteo = useMemo(() => {
+    return pedidosVista.filter((p) => {
       if (estadoFiltro === "activos" && p.estado !== "Activo" && p.estado !== "En Negociación")
         return false;
       if (estadoFiltro === "cerrados" && p.estado !== "Cerrado") return false;
       if (estadoFiltro === "archivados" && p.estado !== "Archivado") return false;
+      return true;
+    });
+  }, [pedidosVista, estadoFiltro]);
+
+  const conteoTemperatura = useMemo(() => {
+    const base: Record<Temperatura, number> = { caliente: 0, tibio: 0, frio: 0 };
+    for (const p of pedidosParaConteo) base[p.temperatura]++;
+    return base;
+  }, [pedidosParaConteo]);
+
+  const pedidosFiltrados = useMemo(() => {
+    const q = busqueda.trim().toLowerCase();
+
+    const filtrados = pedidosParaConteo.filter((p) => {
+      if (temperaturas.size > 0 && !temperaturas.has(p.temperatura)) return false;
+      if (tipos.size > 0 && !p.tipo.split("·").some((t) => tipos.has(t))) return false;
+      if (zonas.size > 0 && !p.zonas.some((z) => zonas.has(z))) return false;
 
       if (q) {
         const haystack = `${p.tipo} ${p.descripcion} ${p.zonas.join(" ")}`.toLowerCase();
@@ -89,7 +98,7 @@ export function PedidoBrowser({
     // "reciente" ya viene ordenado desde la query (created_at desc)
 
     return filtrados;
-  }, [pedidosVista, busqueda, temperaturas, tipos, zonas, estadoFiltro, orden, tc]);
+  }, [pedidosParaConteo, busqueda, temperaturas, tipos, zonas, orden, tc]);
 
   const focoIndexClamped =
     focoIndex !== null ? Math.min(focoIndex, pedidosFiltrados.length - 1) : null;
@@ -125,7 +134,7 @@ export function PedidoBrowser({
         parearOpen={parearOpen}
         onParearOpenChange={setParearOpen}
       />
-      <SubHeader zonasAgrupadas={zonasAgrupadas} conteoTemperatura={conteoTemperatura} total={pedidosVista.length} />
+      <SubHeader zonasAgrupadas={zonasAgrupadas} conteoTemperatura={conteoTemperatura} total={pedidosParaConteo.length} />
 
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1 border-b border-surface-border bg-surface px-6 py-1.5 text-[11px] text-muted sm:px-8 xl:px-10">
         <span className="font-mono font-semibold text-foreground">{pedidosFiltrados.length}</span>

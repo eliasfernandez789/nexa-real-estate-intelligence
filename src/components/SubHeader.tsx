@@ -44,7 +44,7 @@ export function SubHeader({
   } = useFilters();
 
   return (
-    <div className="sticky top-12 z-20 flex flex-wrap items-center justify-between gap-3 border-b border-surface-border bg-chip/40 px-6 py-2 sm:px-8 xl:px-10">
+    <div className="scrollbar-none sticky top-12 z-20 flex flex-nowrap items-center justify-between gap-3 overflow-x-auto overflow-y-hidden whitespace-nowrap border-b border-surface-border bg-chip/40 px-6 py-2 sm:px-8 xl:px-10">
       <div className="flex flex-wrap items-center gap-1">
         <button
           onClick={() => temperaturas.forEach(toggleTemperatura)}

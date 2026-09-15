@@ -30,7 +30,7 @@ export function PedidoCard({
   return (
     <article
       data-pedido-card
-      className={`group flex h-full flex-col justify-between rounded-lg border bg-surface p-3.5 opacity-0 shadow-[0_1px_2px_rgba(11,13,18,0.03)] transition-[transform,box-shadow,border-color] duration-200 [animation-fill-mode:forwards] [animation:card-in_280ms_cubic-bezier(0.16,1,0.3,1)] hover:border-surface-border-hover hover:shadow-md ${
+      className={`group flex h-full flex-col justify-between rounded-lg border bg-surface p-3.5 opacity-0 shadow-[0_1px_3px_rgba(11,13,18,0.08),0_1px_2px_rgba(11,13,18,0.04)] transition-[transform,box-shadow,border-color] duration-200 [animation-fill-mode:forwards] [animation:card-in_280ms_cubic-bezier(0.16,1,0.3,1)] hover:border-surface-border-hover hover:shadow-md ${
         enfocado ? "border-ring ring-2 ring-ring/40" : "border-surface-border"
       }`}
       style={{ animationDelay: `${index * 30}ms` }}

@@ -182,6 +182,16 @@
   background: color-mix(in srgb, var(--ring) 20%, transparent);
 }
 
+/* Permite overflow horizontal en toolbars angostas (header/subheader) sin
+   que la scrollbar del navegador robe alto a una fila de altura fija. */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 @keyframes card-in {
   from {
     opacity: 0;

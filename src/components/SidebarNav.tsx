@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Fire, SquaresFour, ListChecks, SlidersHorizontal, CaretUpDown } from "@phosphor-icons/react";
 import type { Icon } from "@phosphor-icons/react";
 import { SignOutButton } from "@/components/SignOutButton";
@@ -17,6 +19,8 @@ const focusRing =
 
 export function SidebarNav({ counts }: { counts: NavCounts }) {
   const { vista, setVista } = useFilters();
+  const pathname = usePathname();
+  const enConfiguracion = pathname === "/configuracion";
 
   return (
     <div className="flex h-full flex-col">
@@ -43,11 +47,12 @@ export function SidebarNav({ counts }: { counts: NavCounts }) {
           Demand Network
         </div>
         {NAV.map(({ label, vista: v, icon: Icon }) => {
-          const active = vista === v;
+          const active = !enConfiguracion && vista === v;
           const count = v === "red" ? counts.red : v === "mios" ? counts.mios : counts.urgentes;
           return (
-            <button
+            <Link
               key={label}
+              href="/"
               onClick={() => setVista(v)}
               className={`flex items-center justify-between rounded px-2.5 py-1.5 text-[12px] font-medium transition-colors ${
                 active ? "bg-nav-active text-foreground border border-surface-border" : "text-muted-light hover:bg-chip"
@@ -67,19 +72,25 @@ export function SidebarNav({ counts }: { counts: NavCounts }) {
               >
                 {count}
               </span>
-            </button>
+            </Link>
           );
         })}
 
         <div className="px-2 pb-1 pt-3 text-[9.5px] font-semibold uppercase tracking-wider text-muted">
           Sistema
         </div>
-        <button
-          className={`flex items-center gap-2 rounded px-2.5 py-1.5 text-[12px] font-medium text-muted-light transition-colors hover:bg-chip ${focusRing}`}
+        <Link
+          href="/configuracion"
+          className={`flex items-center gap-2 rounded px-2.5 py-1.5 text-[12px] font-medium transition-colors ${
+            enConfiguracion ? "bg-nav-active text-foreground border border-surface-border" : "text-muted-light hover:bg-chip"
+          } ${focusRing}`}
         >
-          <SlidersHorizontal className="h-4 w-4 text-muted" />
+          <SlidersHorizontal
+            weight={enConfiguracion ? "fill" : "regular"}
+            className={`h-4 w-4 ${enConfiguracion ? "text-primary-btn" : "text-muted"}`}
+          />
           Configuración
-        </button>
+        </Link>
         <SignOutButton />
       </nav>
     </div>

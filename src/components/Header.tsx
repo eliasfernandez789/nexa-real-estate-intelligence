@@ -35,7 +35,7 @@ export function Header({
   const { busqueda, setBusqueda, soloOficina, setSoloOficina } = useFilters();
 
   return (
-    <header className="sticky top-0 z-30 flex h-12 flex-wrap items-center justify-between gap-4 border-b border-surface-border bg-surface px-6 sm:px-8 xl:px-10">
+    <header className="scrollbar-none sticky top-0 z-30 flex h-12 flex-nowrap items-center justify-between gap-4 overflow-x-auto overflow-y-hidden whitespace-nowrap border-b border-surface-border bg-surface px-6 sm:px-8 xl:px-10">
       <div className="flex flex-wrap items-center gap-3">
         <div className="relative">
           <MagnifyingGlass

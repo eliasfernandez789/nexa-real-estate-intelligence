@@ -20,11 +20,11 @@ interface Match {
   score: number;
 }
 
-function aUSD(pedido: Pedido, tc: number): number {
+export function aUSD(pedido: Pedido, tc: number): number {
   return pedido.moneda === "USD" ? pedido.precioMaxRaw : pedido.precioMaxRaw / tc;
 }
 
-function compatibilidad(
+export function compatibilidad(
   captacion: { tipo: string; zona: string; moneda: "USD" | "PYG"; precio: number },
   pedido: Pedido,
   tc: number,
