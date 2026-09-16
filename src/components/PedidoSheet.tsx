@@ -62,13 +62,15 @@ export function PedidoSheet({
   const [prevPedido, setPrevPedido] = useState<Pedido | null>(null);
   if (pedido !== prevPedido) {
     setPrevPedido(pedido);
-    if (pedido) setDisplay(pedido);
+    if (pedido) {
+      setDisplay(pedido);
+      setConsultas(pedido.consultas);
+      setLoading(true);
+    }
   }
 
   useEffect(() => {
     if (!pedido) return;
-    setConsultas(pedido.consultas);
-    setLoading(true);
 
     const supabase = createClient();
 
