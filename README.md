@@ -1,3 +1,9 @@
+NEXA — bolsa de pedidos de compradores para agentes de RE/MAX Paraguay. Ver `docs/` (carpeta padre del repo) para producto/UX/diseño.
+
+**Producción:** https://web-theta-murex-48.vercel.app (deploy automático en cada push a `master`, vía Vercel).
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
