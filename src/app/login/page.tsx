@@ -44,18 +44,18 @@ export default function LoginPage() {
           </div>
           <div className="leading-tight">
             <div className="text-sm font-semibold tracking-tight">NEXA</div>
-            <div className="text-[10.5px] text-muted">Real Estate Intelligence</div>
+            <div className="text-[12.5px] text-muted">Real Estate Intelligence</div>
           </div>
         </div>
 
         <h1 className="text-lg font-semibold">Iniciar sesión</h1>
-        <p className="mt-1 text-[13px] text-muted">
+        <p className="mt-1 text-[15px] text-muted">
           Accedé a la bolsa de pedidos de tu red.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="email" className="text-[13px] font-medium text-muted-light">
+            <label htmlFor="email" className="text-[15px] font-medium text-muted-light">
               Email
             </label>
             <Input
@@ -71,7 +71,7 @@ export default function LoginPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="password" className="text-[13px] font-medium text-muted-light">
+            <label htmlFor="password" className="text-[15px] font-medium text-muted-light">
               Contraseña
             </label>
             <Input
@@ -87,7 +87,7 @@ export default function LoginPage() {
           </div>
 
           {error && (
-            <p className="rounded-lg bg-danger-bg px-3 py-2 text-[13px] text-danger-text">
+            <p className="rounded-lg bg-danger-bg px-3 py-2 text-[15px] text-danger-text">
               {error}
             </p>
           )}
@@ -101,7 +101,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p className="mt-6 text-center text-[13px] text-muted">
+        <p className="mt-6 text-center text-[15px] text-muted">
           ¿No tenés cuenta todavía?{" "}
           <Link href="/signup" className="font-medium text-primary-btn hover:underline">
             Registrate

@@ -93,11 +93,11 @@ export function ParearPropiedadButton({
     <>
       <button
         onClick={() => setOpen(true)}
-        className={`inline-flex h-8 items-center gap-1.5 rounded-md border border-surface-border bg-background px-2.5 text-[12px] font-medium text-foreground transition-colors hover:border-surface-border-hover hover:bg-chip ${focusRing}`}
+        className={`inline-flex h-8 items-center gap-1.5 rounded-md border border-surface-border bg-background px-2.5 text-[14px] font-medium text-foreground transition-colors hover:border-surface-border-hover hover:bg-chip ${focusRing}`}
       >
         <ArrowsLeftRight weight="regular" className="h-3.5 w-3.5 text-accent-blue" />
         Parear propiedad
-        <kbd className="rounded border border-surface-border bg-surface px-1 font-mono text-[9px] text-muted">P</kbd>
+        <kbd className="rounded border border-surface-border bg-surface px-1 font-mono text-[11px] text-muted">P</kbd>
       </button>
 
       <Dialog
@@ -113,7 +113,7 @@ export function ParearPropiedadButton({
         >
             <div className="flex items-start justify-between border-b border-surface-border px-5 py-4">
               <div>
-                <div className="text-[10.5px] font-semibold uppercase tracking-wide text-muted">
+                <div className="text-[12.5px] font-semibold uppercase tracking-wide text-muted">
                   Flujo 2 · Motor de pareo
                 </div>
                 <h2 className="mt-0.5 text-base font-semibold">Matchear captación</h2>
@@ -130,14 +130,14 @@ export function ParearPropiedadButton({
             </div>
 
             <div className="flex flex-col gap-4 overflow-y-auto px-5 py-4">
-              <p className="text-[12.5px] text-muted-light">
+              <p className="text-[14.5px] text-muted-light">
                 Cargá lo que acabás de captar. La bolsa te devuelve los pedidos compatibles,
                 ordenados por afinidad.
               </p>
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[13px] font-medium text-muted-light">
+                  <label className="text-[15px] font-medium text-muted-light">
                     Tipo de inmueble
                   </label>
                   <select
@@ -153,7 +153,7 @@ export function ParearPropiedadButton({
                   </select>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[13px] font-medium text-muted-light">
+                  <label className="text-[15px] font-medium text-muted-light">
                     Barrio / Ciudad
                   </label>
                   <select
@@ -176,7 +176,7 @@ export function ParearPropiedadButton({
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[13px] font-medium text-muted-light">Moneda</label>
+                  <label className="text-[15px] font-medium text-muted-light">Moneda</label>
                   <select
                     className={inputClass}
                     value={moneda}
@@ -187,7 +187,7 @@ export function ParearPropiedadButton({
                   </select>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[13px] font-medium text-muted-light">
+                  <label className="text-[15px] font-medium text-muted-light">
                     Precio de la captación
                   </label>
                   <Input
@@ -203,7 +203,7 @@ export function ParearPropiedadButton({
 
               <button
                 onClick={buscar}
-                className={`inline-flex h-9 items-center justify-center gap-2 rounded-lg bg-primary-btn text-[13px] font-medium text-primary-btn-text transition-[filter] duration-150 hover:brightness-110 ${focusRing}`}
+                className={`inline-flex h-9 items-center justify-center gap-2 rounded-lg bg-primary-btn text-[15px] font-medium text-primary-btn-text transition-[filter] duration-150 hover:brightness-110 ${focusRing}`}
               >
                 <MagnifyingGlass weight="bold" className="h-4 w-4" />
                 Buscar coincidencias
@@ -211,7 +211,7 @@ export function ParearPropiedadButton({
 
               {results !== null && (
                 <div className="flex flex-col gap-3 border-t border-surface-border pt-4">
-                  <div className="text-[12.5px] font-medium text-muted-light">
+                  <div className="text-[14.5px] font-medium text-muted-light">
                     {results.length === 0
                       ? "Sin coincidencias para esa captación."
                       : `${results.length} pedido${results.length === 1 ? "" : "s"} compatible${results.length === 1 ? "" : "s"}, ordenados por afinidad`}
@@ -222,26 +222,26 @@ export function ParearPropiedadButton({
                         key={pedido.id}
                         className="flex items-center gap-3 rounded-lg border border-surface-border bg-background p-3"
                       >
-                        <div className="rounded-full bg-nav-active px-2 py-0.5 font-mono text-[11px] font-semibold text-primary-btn">
+                        <div className="rounded-full bg-nav-active px-2 py-0.5 font-mono text-[13px] font-semibold text-primary-btn">
                           {score}%
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-1.5">
-                            <span className="truncate text-[13px] font-semibold">
+                            <span className="truncate text-[15px] font-semibold">
                               {pedido.tipo}
                             </span>
                             <span
-                              className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium ${ESTADO_STYLE[pedido.estado]}`}
+                              className={`rounded-full px-1.5 py-0.5 text-[12px] font-medium ${ESTADO_STYLE[pedido.estado]}`}
                             >
                               {pedido.estado}
                             </span>
                           </div>
-                          <div className="truncate text-[11.5px] text-muted">
+                          <div className="truncate text-[13.5px] text-muted">
                             {TEMPERATURA_LABEL[pedido.temperatura]} · {pedido.zonas.join(", ")} ·{" "}
                             {pedido.agenteNombre}
                           </div>
                         </div>
-                        <div className="font-mono text-[13px] font-semibold">
+                        <div className="font-mono text-[15px] font-semibold">
                           {pedido.precioMax}
                         </div>
                       </div>

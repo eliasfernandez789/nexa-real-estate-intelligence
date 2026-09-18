@@ -39,7 +39,7 @@ export function PedidoCard({
         onClick={() => onOpen?.(pedido)}
         className={`flex flex-1 flex-col gap-2.5 text-left rounded-md ${focusRing}`}
       >
-        <div className="flex items-center justify-between text-[11px]">
+        <div className="flex items-center justify-between text-[13px]">
           <div className="flex items-center gap-2">
             <span className={`inline-flex items-center gap-1.5 font-medium ${TEXT_CLASS[pedido.temperatura]}`}>
               <span className={`h-1.5 w-1.5 rounded-full ${DOT_CLASS[pedido.temperatura]}`} />
@@ -57,26 +57,26 @@ export function PedidoCard({
         </div>
 
         <div>
-          <h3 className="text-[14px] font-semibold leading-tight tracking-[-0.1px] text-foreground group-hover:text-primary-btn transition-colors">
+          <h3 className="text-[16px] font-semibold leading-tight tracking-[-0.1px] text-foreground group-hover:text-primary-btn transition-colors">
             {pedido.tipo.split("·").join(" · ")}
           </h3>
-          <p className="mt-0.5 text-[11px] text-muted-light">{pedido.zonas.join(", ")}</p>
+          <p className="mt-0.5 text-[13px] text-muted-light">{pedido.zonas.join(", ")}</p>
         </div>
 
         <div className="flex items-baseline justify-between rounded-md border border-surface-border bg-background px-2.5 py-2">
           <div>
-            <span className="block text-[10px] font-medium uppercase tracking-wide text-muted">
+            <span className="block text-[12px] font-medium uppercase tracking-wide text-muted">
               Presupuesto máx.
             </span>
-            <span className="font-mono text-[15px] font-bold tracking-tight text-foreground">
+            <span className="font-mono text-[17px] font-bold tracking-tight text-foreground">
               {pedido.precioMax}
             </span>
-            <span className="ml-1 text-[10px] font-medium text-muted">{pedido.moneda}</span>
+            <span className="ml-1 text-[12px] font-medium text-muted">{pedido.moneda}</span>
           </div>
-          <span className="font-mono text-[11px] font-medium text-accent-blue">{pedido.aprox}</span>
+          <span className="font-mono text-[13px] font-medium text-accent-blue">{pedido.aprox}</span>
         </div>
 
-        <p className="line-clamp-2 text-[12px] leading-relaxed text-muted-light">
+        <p className="line-clamp-2 text-[14px] leading-relaxed text-muted-light">
           {pedido.descripcion}
         </p>
       </button>
@@ -84,8 +84,8 @@ export function PedidoCard({
       <div className="mt-3 flex items-center justify-between border-t border-surface-border pt-2.5">
         <div className="flex min-w-0 items-center gap-1.5">
           <ChatCircle weight="regular" className="h-3.5 w-3.5 shrink-0 text-muted" />
-          <span className="font-mono text-[11px] font-medium text-muted-light">{pedido.consultas}</span>
-          <span className="truncate text-[11px]">
+          <span className="font-mono text-[13px] font-medium text-muted-light">{pedido.consultas}</span>
+          <span className="truncate text-[13px]">
             <span className="font-medium text-foreground">{pedido.agenteNombre}</span>
             <span className="text-muted"> · {pedido.agenteOficina}</span>
           </span>
@@ -93,7 +93,7 @@ export function PedidoCard({
         <div className="flex shrink-0 items-center gap-1">
           <button
             onClick={() => onOpen?.(pedido)}
-            className={`h-6 rounded-md border border-surface-border bg-background px-2 text-[11px] font-medium text-foreground transition-colors hover:bg-chip ${focusRing}`}
+            className={`h-6 rounded-md border border-surface-border bg-background px-2 text-[13px] font-medium text-foreground transition-colors hover:bg-chip ${focusRing}`}
           >
             Ficha
           </button>
@@ -105,7 +105,7 @@ export function PedidoCard({
             )}`}
             target="_blank"
             rel="noreferrer"
-            className={`h-6 rounded-md border border-whatsapp/30 bg-whatsapp/10 px-2 text-[11px] font-medium text-whatsapp-text transition-colors hover:bg-whatsapp/20 ${focusRing}`}
+            className={`h-6 rounded-md border border-whatsapp/30 bg-whatsapp/10 px-2 text-[13px] font-medium text-whatsapp-text transition-colors hover:bg-whatsapp/20 ${focusRing}`}
           >
             WhatsApp
           </a>

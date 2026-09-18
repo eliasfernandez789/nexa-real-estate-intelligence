@@ -9,9 +9,11 @@ import {
   ArrowClockwise,
   LockSimple,
   Clock,
+  Trash,
 } from "@phosphor-icons/react";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { createClient } from "@/lib/supabase/client";
+import { eliminarPedido } from "@/lib/actions/pedidos";
 import { TEMPERATURA_LABEL, ESTADO_STYLE, type Pedido } from "@/lib/pedidos";
 
 interface BitacoraEntry {
@@ -54,6 +56,9 @@ export function PedidoSheet({
   const [nota, setNota] = useState("");
   const [loading, setLoading] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  const [confirmandoEliminar, setConfirmandoEliminar] = useState(false);
+  const [eliminando, setEliminando] = useState(false);
+  const [errorEliminar, setErrorEliminar] = useState<string | null>(null);
   // Keeps showing the last pedido's content while the sheet plays its
   // close transition, instead of blanking out mid-animation. Adjusted
   // during render (React's recommended pattern) instead of in an effect,
@@ -66,6 +71,8 @@ export function PedidoSheet({
       setDisplay(pedido);
       setConsultas(pedido.consultas);
       setLoading(true);
+      setConfirmandoEliminar(false);
+      setErrorEliminar(null);
     }
   }
 
@@ -149,6 +156,20 @@ export function PedidoSheet({
     onClose();
   }
 
+  async function eliminar() {
+    if (!display) return;
+    setEliminando(true);
+    setErrorEliminar(null);
+    const result = await eliminarPedido(display.uuid);
+    setEliminando(false);
+    if (result.ok) {
+      router.refresh();
+      onClose();
+    } else {
+      setErrorEliminar(result.error ?? "No se pudo eliminar el pedido.");
+    }
+  }
+
   const tipoIcono = { nota: NotePencil, consulta: Eye, renovacion: ArrowClockwise, sistema: Clock };
 
   return (
@@ -167,7 +188,7 @@ export function PedidoSheet({
           <>
             <div className="flex items-start justify-between border-b border-surface-border px-5 py-4">
               <div className="min-w-0">
-                <div className="text-[10.5px] font-semibold uppercase tracking-wide text-muted">
+                <div className="text-[12.5px] font-semibold uppercase tracking-wide text-muted">
                   {display.id} · {display.agenteOficina}
                 </div>
                 <h2 className="mt-0.5 truncate text-base font-semibold">
@@ -184,22 +205,22 @@ export function PedidoSheet({
 
             <div className="flex flex-1 flex-col gap-5 overflow-y-auto px-5 py-4">
               <div className="flex flex-wrap items-center gap-1.5">
-                <span className="rounded-full bg-chip px-2 py-0.5 text-[11px] font-medium text-muted-light">
+                <span className="rounded-full bg-chip px-2 py-0.5 text-[13px] font-medium text-muted-light">
                   {TEMPERATURA_LABEL[display.temperatura]}
                 </span>
                 <span
-                  className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${ESTADO_STYLE[display.estado]}`}
+                  className={`rounded-full px-2 py-0.5 text-[13px] font-medium ${ESTADO_STYLE[display.estado]}`}
                 >
                   {display.estado}
                 </span>
-                <span className="text-[11px] text-muted">{display.tiempo}</span>
+                <span className="text-[13px] text-muted">{display.tiempo}</span>
               </div>
 
               <div className="flex flex-col gap-2">
-                <div className="text-[10.5px] font-semibold uppercase tracking-wide text-muted">
+                <div className="text-[12.5px] font-semibold uppercase tracking-wide text-muted">
                   Criterios de búsqueda
                 </div>
-                <dl className="grid grid-cols-[100px_1fr] gap-y-1.5 text-[13px]">
+                <dl className="grid grid-cols-[100px_1fr] gap-y-1.5 text-[15px]">
                   <dt className="text-muted">Tipo</dt>
                   <dd>{display.tipo.split("·").join(", ")}</dd>
                   <dt className="text-muted">Presupuesto</dt>
@@ -208,34 +229,34 @@ export function PedidoSheet({
                     <span className="text-muted">{display.moneda} MÁX. · {display.aprox}</span>
                   </dd>
                   <dt className="text-muted">Publicado</dt>
-                  <dd className="font-mono text-[12px]">{fechaHora(display.createdAt)}</dd>
+                  <dd className="font-mono text-[14px]">{fechaHora(display.createdAt)}</dd>
                 </dl>
                 <div className="flex flex-wrap gap-1.5">
                   {display.zonas.map((z) => (
                     <span
                       key={z}
-                      className="rounded-md bg-chip px-2 py-0.5 text-[11px] font-medium text-muted-light"
+                      className="rounded-md bg-chip px-2 py-0.5 text-[13px] font-medium text-muted-light"
                     >
                       {z}
                     </span>
                   ))}
                 </div>
-                <p className="rounded-lg bg-background px-3 py-2.5 text-[12.5px] leading-relaxed text-muted-light">
+                <p className="rounded-lg bg-background px-3 py-2.5 text-[14.5px] leading-relaxed text-muted-light">
                   {display.descripcion}
                 </p>
               </div>
 
               <div className="flex flex-col gap-2">
-                <div className="text-[10.5px] font-semibold uppercase tracking-wide text-muted">
+                <div className="text-[12.5px] font-semibold uppercase tracking-wide text-muted">
                   Agente asignado
                 </div>
                 <div className="flex items-center gap-3 rounded-lg bg-background px-3 py-2.5">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-surface-border text-[11px] font-semibold">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-surface-border text-[13px] font-semibold">
                     {display.agenteIniciales}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="truncate text-[13px] font-medium">{display.agenteNombre}</div>
-                    <div className="text-[11px] text-muted">{display.agenteOficina}</div>
+                    <div className="truncate text-[15px] font-medium">{display.agenteNombre}</div>
+                    <div className="text-[13px] text-muted">{display.agenteOficina}</div>
                   </div>
                   <a
                     href={display.whatsapp}
@@ -249,42 +270,42 @@ export function PedidoSheet({
               </div>
 
               <div className="flex flex-col gap-2">
-                <div className="text-[10.5px] font-semibold uppercase tracking-wide text-muted">
+                <div className="text-[12.5px] font-semibold uppercase tracking-wide text-muted">
                   Interés recibido
                 </div>
                 <div className="flex items-center gap-3 rounded-lg bg-background px-3 py-2.5">
                   <Eye className="h-5 w-5 text-muted" />
                   <div>
                     <div className="font-mono text-2xl font-semibold leading-none">{consultas}</div>
-                    <div className="mt-1 text-[11px] text-muted">consultas registradas</div>
+                    <div className="mt-1 text-[13px] text-muted">consultas registradas</div>
                   </div>
                 </div>
               </div>
 
               {display.puedeVerPrivado ? (
                 <div className="flex flex-col gap-2">
-                  <div className="text-[10.5px] font-semibold uppercase tracking-wide text-muted">
+                  <div className="text-[12.5px] font-semibold uppercase tracking-wide text-muted">
                     Cliente comprador <span className="normal-case text-muted">· privado</span>
                   </div>
                   {privado ? (
-                    <dl className="grid grid-cols-[100px_1fr] gap-y-1.5 rounded-lg bg-background px-3 py-2.5 text-[13px]">
+                    <dl className="grid grid-cols-[100px_1fr] gap-y-1.5 rounded-lg bg-background px-3 py-2.5 text-[15px]">
                       <dt className="text-muted">Nombre</dt>
                       <dd>{privado.cliente_nombre}</dd>
                       <dt className="text-muted">Contacto</dt>
                       <dd className="font-mono">{privado.cliente_contacto}</dd>
                     </dl>
                   ) : (
-                    <div className="rounded-lg bg-background px-3 py-2.5 text-[12.5px] text-muted">
+                    <div className="rounded-lg bg-background px-3 py-2.5 text-[14.5px] text-muted">
                       {loading ? "Cargando…" : "Sin datos de cliente cargados."}
                     </div>
                   )}
                 </div>
               ) : (
                 <div className="flex flex-col gap-2">
-                  <div className="text-[10.5px] font-semibold uppercase tracking-wide text-muted">
+                  <div className="text-[12.5px] font-semibold uppercase tracking-wide text-muted">
                     Cliente comprador
                   </div>
-                  <div className="flex items-start gap-2.5 rounded-lg border border-dashed border-surface-border-hover bg-background px-3 py-2.5 text-[12.5px] leading-relaxed text-muted-light">
+                  <div className="flex items-start gap-2.5 rounded-lg border border-dashed border-surface-border-hover bg-background px-3 py-2.5 text-[14.5px] leading-relaxed text-muted-light">
                     <LockSimple className="mt-0.5 h-4 w-4 shrink-0 text-muted" />
                     <span>
                       Datos reservados al agente que publicó el pedido y a los administradores.
@@ -297,7 +318,7 @@ export function PedidoSheet({
 
               {display.vigenciaDias !== null && (
                 <div
-                  className={`flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-[12px] ${
+                  className={`flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-[14px] ${
                     display.vigenciaDias >= 0
                       ? "bg-background text-muted"
                       : "bg-danger-bg text-danger-text"
@@ -313,7 +334,7 @@ export function PedidoSheet({
                     <button
                       onClick={renovar}
                       disabled={isPending}
-                      className={`inline-flex items-center gap-1.5 rounded-md border border-surface-border bg-surface px-2.5 py-1 text-[11.5px] font-medium transition-colors hover:bg-chip disabled:opacity-60 ${focusRing}`}
+                      className={`inline-flex items-center gap-1.5 rounded-md border border-surface-border bg-surface px-2.5 py-1 text-[13.5px] font-medium transition-colors hover:bg-chip disabled:opacity-60 ${focusRing}`}
                     >
                       <ArrowClockwise className="h-3.5 w-3.5" />
                       Renovar 30 días
@@ -323,7 +344,7 @@ export function PedidoSheet({
               )}
 
               <div className="flex flex-col gap-2">
-                <div className="text-[10.5px] font-semibold uppercase tracking-wide text-muted">
+                <div className="text-[12.5px] font-semibold uppercase tracking-wide text-muted">
                   Bitácora · {bitacora.length} registro{bitacora.length === 1 ? "" : "s"}
                 </div>
 
@@ -334,18 +355,18 @@ export function PedidoSheet({
                       onChange={(e) => setNota(e.target.value)}
                       placeholder="Ej.: Se envió opción en Barrio Jara."
                       rows={2}
-                      className={`h-auto w-full resize-y rounded-lg border border-surface-border bg-surface px-2.5 py-2 text-[13px] placeholder:text-muted ${focusRing}`}
+                      className={`h-auto w-full resize-y rounded-lg border border-surface-border bg-surface px-2.5 py-2 text-[15px] placeholder:text-muted ${focusRing}`}
                     />
                     <button
                       onClick={agregarNota}
                       disabled={isPending || !nota.trim()}
-                      className={`self-end rounded-md bg-primary-btn px-3 py-1.5 text-[12.5px] font-medium text-primary-btn-text transition-[filter] hover:brightness-110 disabled:opacity-60 ${focusRing}`}
+                      className={`self-end rounded-md bg-primary-btn px-3 py-1.5 text-[14.5px] font-medium text-primary-btn-text transition-[filter] hover:brightness-110 disabled:opacity-60 ${focusRing}`}
                     >
                       Agregar nota
                     </button>
                   </div>
                 ) : (
-                  <div className="flex items-start gap-2.5 rounded-lg border border-dashed border-surface-border-hover bg-background px-3 py-2.5 text-[12.5px] leading-relaxed text-muted-light">
+                  <div className="flex items-start gap-2.5 rounded-lg border border-dashed border-surface-border-hover bg-background px-3 py-2.5 text-[14.5px] leading-relaxed text-muted-light">
                     <LockSimple className="mt-0.5 h-4 w-4 shrink-0 text-muted" />
                     Solo la oficina propietaria escribe en la bitácora. Podés leer las notas
                     visibles a toda la red.
@@ -354,10 +375,10 @@ export function PedidoSheet({
 
                 <div className="flex flex-col">
                   {loading && bitacora.length === 0 && (
-                    <p className="py-2 text-[12.5px] text-muted">Cargando…</p>
+                    <p className="py-2 text-[14.5px] text-muted">Cargando…</p>
                   )}
                   {!loading && bitacora.length === 0 && (
-                    <p className="py-2 text-[12.5px] text-muted">Todavía no hay notas.</p>
+                    <p className="py-2 text-[14.5px] text-muted">Todavía no hay notas.</p>
                   )}
                   {bitacora.map((entry) => {
                     const Icon = tipoIcono[entry.tipo];
@@ -371,14 +392,14 @@ export function PedidoSheet({
                         </div>
                         <div className="min-w-0">
                           <div className="flex flex-wrap items-baseline gap-1.5">
-                            <span className="text-[12.5px] font-semibold">
+                            <span className="text-[14.5px] font-semibold">
                               {entry.agentes?.nombre ?? "—"}
                             </span>
-                            <span className="font-mono text-[10.5px] text-muted">
+                            <span className="font-mono text-[12.5px] text-muted">
                               {fechaHora(entry.created_at)}
                             </span>
                           </div>
-                          <div className="text-[12.5px] leading-relaxed text-muted-light">
+                          <div className="text-[14.5px] leading-relaxed text-muted-light">
                             {entry.texto}
                           </div>
                         </div>
@@ -387,6 +408,45 @@ export function PedidoSheet({
                   })}
                 </div>
               </div>
+
+              {display.esMio && (
+                <div className="flex flex-col gap-2 border-t border-surface-border pt-4">
+                  {!confirmandoEliminar ? (
+                    <button
+                      onClick={() => setConfirmandoEliminar(true)}
+                      className={`inline-flex w-fit items-center gap-1.5 rounded-md px-2.5 py-1.5 text-[13.5px] font-medium text-danger-text transition-colors hover:bg-danger-bg ${focusRing}`}
+                    >
+                      <Trash className="h-3.5 w-3.5" />
+                      Eliminar pedido
+                    </button>
+                  ) : (
+                    <div className="flex flex-col gap-2 rounded-lg bg-danger-bg px-3 py-2.5">
+                      <p className="text-[14px] text-danger-text">
+                        ¿Eliminar este pedido? Esta acción no se puede deshacer.
+                      </p>
+                      {errorEliminar && (
+                        <p className="text-[13.5px] font-medium text-danger-text">{errorEliminar}</p>
+                      )}
+                      <div className="flex gap-2">
+                        <button
+                          onClick={eliminar}
+                          disabled={eliminando}
+                          className={`rounded-md bg-danger-text px-3 py-1.5 text-[13.5px] font-medium text-white transition-colors hover:brightness-110 disabled:opacity-60 ${focusRing}`}
+                        >
+                          {eliminando ? "Eliminando…" : "Sí, eliminar"}
+                        </button>
+                        <button
+                          onClick={() => setConfirmandoEliminar(false)}
+                          disabled={eliminando}
+                          className={`rounded-md border border-surface-border bg-surface px-3 py-1.5 text-[13.5px] font-medium text-foreground transition-colors hover:bg-chip disabled:opacity-60 ${focusRing}`}
+                        >
+                          Cancelar
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </>
         )}

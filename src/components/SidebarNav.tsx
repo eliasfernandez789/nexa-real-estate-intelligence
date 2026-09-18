@@ -26,24 +26,24 @@ export function SidebarNav({ counts }: { counts: NavCounts }) {
     <div className="flex h-full flex-col">
       <div className="flex h-12 items-center justify-between border-b border-surface-border px-3">
         <div className="flex items-center gap-2">
-          <div className="flex h-5 w-5 items-center justify-center rounded bg-primary-btn text-[10px] font-bold text-primary-btn-text">
+          <div className="flex h-5 w-5 items-center justify-center rounded bg-primary-btn text-[12px] font-bold text-primary-btn-text">
             N
           </div>
           <div className="flex flex-col leading-none">
             <div className="flex items-center gap-1.5">
-              <span className="text-[13px] font-semibold tracking-tight">NEXA</span>
-              <span className="rounded border border-surface-border bg-background px-1 py-0.5 font-mono text-[9px] font-medium uppercase tracking-wide text-muted">
+              <span className="text-[15px] font-semibold tracking-tight">NEXA</span>
+              <span className="rounded border border-surface-border bg-background px-1 py-0.5 font-mono text-[11px] font-medium uppercase tracking-wide text-muted">
                 PY
               </span>
             </div>
-            <span className="mt-0.5 text-[9.5px] text-muted">Real Estate Intelligence</span>
+            <span className="mt-0.5 text-[11.5px] text-muted">Real Estate Intelligence</span>
           </div>
         </div>
         <CaretUpDown className="h-3.5 w-3.5 text-muted" />
       </div>
 
       <nav className="flex flex-1 flex-col gap-0.5 p-2">
-        <div className="px-2 pb-1 pt-1 text-[9.5px] font-semibold uppercase tracking-wider text-muted">
+        <div className="px-2 pb-1 pt-1 text-[11.5px] font-semibold uppercase tracking-wider text-muted">
           Demand Network
         </div>
         {NAV.map(({ label, vista: v, icon: Icon }) => {
@@ -54,7 +54,7 @@ export function SidebarNav({ counts }: { counts: NavCounts }) {
               key={label}
               href="/"
               onClick={() => setVista(v)}
-              className={`flex items-center justify-between rounded px-2.5 py-1.5 text-[12px] font-medium transition-colors ${
+              className={`flex items-center justify-between rounded px-2.5 py-1.5 text-[14px] font-medium transition-colors ${
                 active ? "bg-nav-active text-foreground border border-surface-border" : "text-muted-light hover:bg-chip"
               } ${focusRing}`}
             >
@@ -66,7 +66,7 @@ export function SidebarNav({ counts }: { counts: NavCounts }) {
                 {label}
               </span>
               <span
-                className={`rounded px-1.5 py-0.5 font-mono text-[10.5px] font-semibold ${
+                className={`rounded px-1.5 py-0.5 font-mono text-[12.5px] font-semibold ${
                   active ? "bg-surface border border-surface-border text-foreground" : "text-muted"
                 }`}
               >
@@ -76,12 +76,12 @@ export function SidebarNav({ counts }: { counts: NavCounts }) {
           );
         })}
 
-        <div className="px-2 pb-1 pt-3 text-[9.5px] font-semibold uppercase tracking-wider text-muted">
+        <div className="px-2 pb-1 pt-3 text-[11.5px] font-semibold uppercase tracking-wider text-muted">
           Sistema
         </div>
         <Link
           href="/configuracion"
-          className={`flex items-center gap-2 rounded px-2.5 py-1.5 text-[12px] font-medium transition-colors ${
+          className={`flex items-center gap-2 rounded px-2.5 py-1.5 text-[14px] font-medium transition-colors ${
             enConfiguracion ? "bg-nav-active text-foreground border border-surface-border" : "text-muted-light hover:bg-chip"
           } ${focusRing}`}
         >

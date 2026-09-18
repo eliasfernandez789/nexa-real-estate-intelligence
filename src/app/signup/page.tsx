@@ -95,18 +95,18 @@ export default function SignupPage() {
           </div>
           <div className="leading-tight">
             <div className="text-sm font-semibold tracking-tight">NEXA</div>
-            <div className="text-[10.5px] text-muted">Real Estate Intelligence</div>
+            <div className="text-[12.5px] text-muted">Real Estate Intelligence</div>
           </div>
         </div>
 
         <h1 className="text-lg font-semibold">Crear cuenta</h1>
-        <p className="mt-1 text-[13px] text-muted">
+        <p className="mt-1 text-[15px] text-muted">
           Sumate a la bolsa de pedidos de tu oficina.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="nombre" className="text-[13px] font-medium text-muted-light">
+            <label htmlFor="nombre" className="text-[15px] font-medium text-muted-light">
               Nombre y apellido
             </label>
             <Input
@@ -121,7 +121,7 @@ export default function SignupPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="oficina" className="text-[13px] font-medium text-muted-light">
+            <label htmlFor="oficina" className="text-[15px] font-medium text-muted-light">
               Oficina
             </label>
             <select
@@ -141,7 +141,7 @@ export default function SignupPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="email" className="text-[13px] font-medium text-muted-light">
+            <label htmlFor="email" className="text-[15px] font-medium text-muted-light">
               Email
             </label>
             <Input
@@ -157,7 +157,7 @@ export default function SignupPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="password" className="text-[13px] font-medium text-muted-light">
+            <label htmlFor="password" className="text-[15px] font-medium text-muted-light">
               Contraseña
             </label>
             <Input
@@ -174,7 +174,7 @@ export default function SignupPage() {
           </div>
 
           {error && (
-            <p className="rounded-lg bg-danger-bg px-3 py-2 text-[13px] text-danger-text">
+            <p className="rounded-lg bg-danger-bg px-3 py-2 text-[15px] text-danger-text">
               {error}
             </p>
           )}
@@ -188,7 +188,7 @@ export default function SignupPage() {
           </button>
         </form>
 
-        <p className="mt-6 text-center text-[13px] text-muted">
+        <p className="mt-6 text-center text-[15px] text-muted">
           ¿Ya tenés cuenta?{" "}
           <Link href="/login" className="font-medium text-primary-btn hover:underline">
             Iniciar sesión

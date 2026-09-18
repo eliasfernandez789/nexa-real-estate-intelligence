@@ -136,7 +136,7 @@ export function PedidoBrowser({
       />
       <SubHeader zonasAgrupadas={zonasAgrupadas} conteoTemperatura={conteoTemperatura} total={pedidosParaConteo.length} />
 
-      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 border-b border-surface-border bg-surface px-6 py-1.5 text-[11px] text-muted sm:px-8 xl:px-10">
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 border-b border-surface-border bg-surface px-6 py-1.5 text-[13px] text-muted sm:px-8 xl:px-10">
         <span className="font-mono font-semibold text-foreground">{pedidosFiltrados.length}</span>
         <span>pedido{pedidosFiltrados.length === 1 ? "" : "s"} en esta vista</span>
         <span className="text-surface-border-hover">·</span>
@@ -171,7 +171,7 @@ export function PedidoBrowser({
         />
       </div>
 
-      <div className="sticky bottom-0 z-20 hidden h-7 items-center justify-between border-t border-surface-border bg-surface px-6 text-[10px] text-muted sm:flex sm:px-8 xl:px-10">
+      <div className="sticky bottom-0 z-20 hidden h-7 items-center justify-between border-t border-surface-border bg-surface px-6 text-[12px] text-muted sm:flex sm:px-8 xl:px-10">
         <div className="flex items-center gap-3">
           <span className="flex items-center gap-1">
             <kbd className="rounded border border-surface-border bg-chip px-1 font-mono text-foreground">J</kbd>

@@ -77,3 +77,36 @@ export async function crearPedido(formData: FormData): Promise<CrearPedidoResult
   revalidatePath("/");
   return { ok: true };
 }
+
+export interface EliminarPedidoResult {
+  ok: boolean;
+  error?: string;
+}
+
+export async function eliminarPedido(pedidoUuid: string): Promise<EliminarPedidoResult> {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { ok: false, error: "No hay sesión activa." };
+
+  const { data: agente } = await supabase
+    .from("agentes")
+    .select("id")
+    .eq("auth_user_id", user.id)
+    .single();
+  if (!agente) return { ok: false, error: "No se encontró tu perfil de agente." };
+
+  const { error, count } = await supabase
+    .from("pedidos")
+    .delete({ count: "exact" })
+    .eq("id", pedidoUuid)
+    .eq("agente_id", agente.id);
+
+  if (error) return { ok: false, error: error.message };
+  if (!count) return { ok: false, error: "Solo podés eliminar pedidos que vos mismo publicaste." };
+
+  revalidatePath("/");
+  return { ok: true };
+}

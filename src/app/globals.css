@@ -147,21 +147,22 @@
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-geist-sans);
 
-  /* ---- Typography scale (semantic mapping documented in docs/DESIGN.md) ---- */
-  --text-xs: 0.75rem; /* 12px — caption / metadata */
-  --text-xs--line-height: 1rem;
-  --text-sm: 0.875rem; /* 14px — label / body-small */
-  --text-sm--line-height: 1.25rem;
-  --text-base: 0.9375rem; /* 15px — body */
-  --text-base--line-height: 1.4rem;
-  --text-lg: 1.0625rem; /* 17px — title */
-  --text-lg--line-height: 1.5rem;
-  --text-xl: 1.25rem; /* 20px — heading */
-  --text-xl--line-height: 1.75rem;
-  --text-2xl: 1.5rem; /* 24px — display-small */
-  --text-2xl--line-height: 2rem;
-  --text-3xl: 1.875rem; /* 30px — display */
-  --text-3xl--line-height: 2.25rem;
+  /* ---- Typography scale (semantic mapping documented in docs/DESIGN.md) ----
+     Bumped +2px across the board (feedback: interfaz se sentía muy chica). */
+  --text-xs: 0.875rem; /* 14px — caption / metadata */
+  --text-xs--line-height: 1.125rem;
+  --text-sm: 1rem; /* 16px — label / body-small */
+  --text-sm--line-height: 1.375rem;
+  --text-base: 1.0625rem; /* 17px — body */
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.1875rem; /* 19px — title */
+  --text-lg--line-height: 1.625rem;
+  --text-xl: 1.375rem; /* 22px — heading */
+  --text-xl--line-height: 1.875rem;
+  --text-2xl: 1.625rem; /* 26px — display-small */
+  --text-2xl--line-height: 2.125rem;
+  --text-3xl: 2rem; /* 32px — display */
+  --text-3xl--line-height: 2.375rem;
 }
 
 @layer base {
@@ -171,7 +172,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans), -apple-system, "Segoe UI", sans-serif;
-    font-size: 14px;
+    font-size: 15px;
   }
   html {
     @apply font-sans;

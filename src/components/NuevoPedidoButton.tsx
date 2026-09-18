@@ -69,10 +69,10 @@ export function NuevoPedidoButton({
     <>
       <button
         onClick={() => setOpen(true)}
-        className={`inline-flex h-8 items-center gap-1.5 rounded-md bg-primary-btn px-3 text-[12px] font-medium text-primary-btn-text transition-[filter] duration-150 hover:brightness-110 ${focusRing}`}
+        className={`inline-flex h-8 items-center gap-1.5 rounded-md bg-primary-btn px-3 text-[14px] font-medium text-primary-btn-text transition-[filter] duration-150 hover:brightness-110 ${focusRing}`}
       >
         + Nuevo pedido
-        <kbd className="rounded border border-white/25 bg-black/20 px-1 font-mono text-[9px] text-white/80">N</kbd>
+        <kbd className="rounded border border-white/25 bg-black/20 px-1 font-mono text-[11px] text-white/80">N</kbd>
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>
@@ -82,7 +82,7 @@ export function NuevoPedidoButton({
         >
             <div className="flex items-start justify-between border-b border-surface-border px-5 py-4">
               <div>
-                <div className="text-[10.5px] font-semibold uppercase tracking-wide text-muted">
+                <div className="text-[12.5px] font-semibold uppercase tracking-wide text-muted">
                   Flujo 1 · Cargar pedido
                 </div>
                 <h2 className="mt-0.5 text-base font-semibold">Nuevo pedido de comprador</h2>
@@ -97,7 +97,7 @@ export function NuevoPedidoButton({
 
             <form action={handleSubmit} className="flex flex-col gap-4 overflow-y-auto px-5 py-4">
               <div className="flex flex-col gap-2">
-                <label className="text-[13px] font-medium text-muted-light">
+                <label className="text-[15px] font-medium text-muted-light">
                   Tipo de inmueble <span className="text-danger-text">*</span>
                 </label>
                 <div className="flex flex-wrap gap-1.5">
@@ -119,19 +119,19 @@ export function NuevoPedidoButton({
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-[13px] font-medium text-muted-light">
+                <label className="text-[15px] font-medium text-muted-light">
                   Zonas / Barrios <span className="text-danger-text">*</span>
                 </label>
                 <div className="max-h-40 overflow-y-auto rounded-lg border border-surface-border bg-background p-2">
                   {zonasAgrupadas.map((g) => (
                     <div key={g.grupo}>
-                      <div className="px-1.5 pb-1 pt-2 text-[10.5px] font-semibold uppercase tracking-wide text-muted">
+                      <div className="px-1.5 pb-1 pt-2 text-[12.5px] font-semibold uppercase tracking-wide text-muted">
                         {g.grupo}
                       </div>
                       {g.zonas.map((z) => (
                         <label
                           key={z.id}
-                          className="flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] text-muted-light hover:bg-chip"
+                          className="flex items-center gap-2 rounded-md px-1.5 py-1 text-[15px] text-muted-light hover:bg-chip"
                         >
                           <input
                             type="checkbox"
@@ -149,14 +149,14 @@ export function NuevoPedidoButton({
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[13px] font-medium text-muted-light">Moneda</label>
+                  <label className="text-[15px] font-medium text-muted-light">Moneda</label>
                   <select name="moneda" className={inputClass} defaultValue="USD">
                     <option value="USD">USD — Dólares</option>
                     <option value="PYG">PYG — Guaraníes</option>
                   </select>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[13px] font-medium text-muted-light">
+                  <label className="text-[15px] font-medium text-muted-light">
                     Presupuesto máximo <span className="text-danger-text">*</span>
                   </label>
                   <Input name="precioMax" type="number" min={0} placeholder="180000" />
@@ -164,7 +164,7 @@ export function NuevoPedidoButton({
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-[13px] font-medium text-muted-light">Observaciones</label>
+                <label className="text-[15px] font-medium text-muted-light">Observaciones</label>
                 <textarea
                   name="descripcion"
                   rows={3}
@@ -174,7 +174,7 @@ export function NuevoPedidoButton({
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-[13px] font-medium text-muted-light">
+                <label className="text-[15px] font-medium text-muted-light">
                   Temperatura del lead <span className="text-danger-text">*</span>
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -189,35 +189,35 @@ export function NuevoPedidoButton({
                           : "border-surface-border bg-background hover:bg-chip"
                       } ${focusRing}`}
                     >
-                      <div className="text-[12.5px] font-semibold">{t.label}</div>
-                      <div className="text-[10.5px] text-muted">{t.hint}</div>
+                      <div className="text-[14.5px] font-semibold">{t.label}</div>
+                      <div className="text-[12.5px] text-muted">{t.hint}</div>
                     </button>
                   ))}
                 </div>
               </div>
 
-              <div className="rounded-lg border border-ring/25 bg-nav-active/40 px-3.5 py-3 text-[12.5px] leading-relaxed text-muted-light">
+              <div className="rounded-lg border border-ring/25 bg-nav-active/40 px-3.5 py-3 text-[14.5px] leading-relaxed text-muted-light">
                 Estos dos campos viven en una tabla aparte con su propia política RLS. La red
                 externa ve el pedido, nunca al cliente.
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[13px] font-medium text-muted-light">
-                    Nombre del cliente <span className="text-[10px] text-muted">privado</span>
+                  <label className="text-[15px] font-medium text-muted-light">
+                    Nombre del cliente <span className="text-[12px] text-muted">privado</span>
                   </label>
                   <Input name="clienteNombre" placeholder="Nombre y apellido" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[13px] font-medium text-muted-light">
-                    Contacto del cliente <span className="text-[10px] text-muted">privado</span>
+                  <label className="text-[15px] font-medium text-muted-light">
+                    Contacto del cliente <span className="text-[12px] text-muted">privado</span>
                   </label>
                   <Input name="clienteContacto" placeholder="+595 9xx xxx xxx" />
                 </div>
               </div>
 
               {error && (
-                <p className="rounded-lg bg-danger-bg px-3 py-2 text-[13px] text-danger-text">
+                <p className="rounded-lg bg-danger-bg px-3 py-2 text-[15px] text-danger-text">
                   {error}
                 </p>
               )}
@@ -226,14 +226,14 @@ export function NuevoPedidoButton({
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className={`h-9 rounded-lg border border-surface-border bg-background px-3.5 text-[13px] font-medium text-foreground transition-colors hover:bg-chip ${focusRing}`}
+                  className={`h-9 rounded-lg border border-surface-border bg-background px-3.5 text-[15px] font-medium text-foreground transition-colors hover:bg-chip ${focusRing}`}
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
                   disabled={isPending}
-                  className={`h-9 rounded-lg bg-primary-btn px-3.5 text-[13px] font-medium text-primary-btn-text transition-[filter] duration-150 hover:brightness-110 disabled:opacity-60 ${focusRing}`}
+                  className={`h-9 rounded-lg bg-primary-btn px-3.5 text-[15px] font-medium text-primary-btn-text transition-[filter] duration-150 hover:brightness-110 disabled:opacity-60 ${focusRing}`}
                 >
                   {isPending ? "Publicando…" : "Publicar en la bolsa"}
                 </button>

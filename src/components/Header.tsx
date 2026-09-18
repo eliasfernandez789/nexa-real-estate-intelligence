@@ -48,9 +48,9 @@ export function Header({
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
             placeholder="Buscar por tipo, zona, agente o requerimiento…"
-            className={`h-8 w-[280px] rounded-md border border-surface-border bg-background pl-8 pr-12 text-[12px] text-foreground placeholder:text-muted transition-colors duration-150 hover:border-surface-border-hover focus-visible:border-ring/70 ${focusRing}`}
+            className={`h-8 w-[280px] rounded-md border border-surface-border bg-background pl-8 pr-12 text-[14px] text-foreground placeholder:text-muted transition-colors duration-150 hover:border-surface-border-hover focus-visible:border-ring/70 ${focusRing}`}
           />
-          <kbd className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 rounded border border-surface-border bg-surface px-1 font-mono text-[9px] text-muted shadow-xs">
+          <kbd className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 rounded border border-surface-border bg-surface px-1 font-mono text-[11px] text-muted shadow-xs">
             ⌘K
           </kbd>
         </div>
@@ -58,7 +58,7 @@ export function Header({
         <div className="flex items-center gap-0.5 rounded-md border border-surface-border bg-background p-0.5">
           <button
             onClick={() => setSoloOficina(false)}
-            className={`rounded px-2.5 py-1 text-[11px] font-medium transition-colors ${
+            className={`rounded px-2.5 py-1 text-[13px] font-medium transition-colors ${
               !soloOficina
                 ? "bg-surface text-foreground shadow-xs"
                 : "text-muted hover:bg-chip hover:text-muted-light"
@@ -68,7 +68,7 @@ export function Header({
           </button>
           <button
             onClick={() => setSoloOficina(true)}
-            className={`rounded px-2.5 py-1 text-[11px] font-medium transition-colors ${
+            className={`rounded px-2.5 py-1 text-[13px] font-medium transition-colors ${
               soloOficina
                 ? "bg-surface text-foreground shadow-xs"
                 : "text-muted hover:bg-chip hover:text-muted-light"

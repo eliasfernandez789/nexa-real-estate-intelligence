@@ -48,7 +48,7 @@ export function SubHeader({
       <div className="flex flex-wrap items-center gap-1">
         <button
           onClick={() => temperaturas.forEach(toggleTemperatura)}
-          className={`h-6 rounded px-2 text-[11px] font-semibold transition-colors ${
+          className={`h-6 rounded px-2 text-[13px] font-semibold transition-colors ${
             temperaturas.size === 0
               ? "bg-surface border border-surface-border text-foreground shadow-xs"
               : "text-muted hover:bg-surface"
@@ -62,13 +62,13 @@ export function SubHeader({
             <button
               key={value}
               onClick={() => toggleTemperatura(value)}
-              className={`inline-flex h-6 items-center gap-1.5 rounded px-2 text-[11px] transition-colors ${
+              className={`inline-flex h-6 items-center gap-1.5 rounded px-2 text-[13px] transition-colors ${
                 active ? "bg-surface border border-surface-border text-foreground shadow-xs" : "text-muted hover:bg-surface"
               } ${focusRing}`}
             >
               <span className={`h-1.5 w-1.5 rounded-full ${dot}`} />
               {label}
-              <span className={`font-mono text-[10px] font-medium ${active ? text : "text-muted"}`}>
+              <span className={`font-mono text-[12px] font-medium ${active ? text : "text-muted"}`}>
                 {conteoTemperatura[value]}
               </span>
             </button>
@@ -77,7 +77,7 @@ export function SubHeader({
 
         <div className="mx-1 h-3.5 w-px bg-surface-border" />
 
-        <div className="flex items-center gap-1 text-[11px]">
+        <div className="flex items-center gap-1 text-[13px]">
           <button
             onClick={() => tipos.forEach(toggleTipo)}
             className={`h-6 rounded px-2 font-medium transition-colors ${
@@ -103,7 +103,7 @@ export function SubHeader({
       <div className="flex items-center gap-2">
         <Popover>
           <PopoverTrigger
-            className={`inline-flex h-6 items-center gap-1 rounded border px-2 text-[11px] transition-colors ${
+            className={`inline-flex h-6 items-center gap-1 rounded border px-2 text-[13px] transition-colors ${
               zonas.size > 0
                 ? "border-primary-btn bg-nav-active text-primary-btn"
                 : "border-surface-border bg-surface text-muted-light hover:border-surface-border-hover"
@@ -116,13 +116,13 @@ export function SubHeader({
           <PopoverContent align="start" className="max-h-72 w-64 overflow-y-auto p-2">
             {zonasAgrupadas.map((g) => (
               <div key={g.grupo}>
-                <div className="px-1.5 pb-1 pt-2 text-[10.5px] font-semibold uppercase tracking-wide text-muted">
+                <div className="px-1.5 pb-1 pt-2 text-[12.5px] font-semibold uppercase tracking-wide text-muted">
                   {g.grupo}
                 </div>
                 {g.zonas.map((z) => (
                   <label
                     key={z.id}
-                    className="flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] text-muted-light hover:bg-chip"
+                    className="flex items-center gap-2 rounded-md px-1.5 py-1 text-[15px] text-muted-light hover:bg-chip"
                   >
                     <input
                       type="checkbox"
@@ -142,7 +142,7 @@ export function SubHeader({
           <select
             value={estadoFiltro}
             onChange={(e) => setEstadoFiltro(e.target.value as EstadoFiltro)}
-            className={`h-6 appearance-none rounded border border-surface-border bg-surface pl-2 pr-6 text-[11px] font-medium text-foreground transition-colors hover:border-surface-border-hover ${focusRing}`}
+            className={`h-6 appearance-none rounded border border-surface-border bg-surface pl-2 pr-6 text-[13px] font-medium text-foreground transition-colors hover:border-surface-border-hover ${focusRing}`}
           >
             {ESTADOS.map((e) => (
               <option key={e.value} value={e.value}>
@@ -155,7 +155,7 @@ export function SubHeader({
 
         <button
           onClick={limpiar}
-          className={`h-6 rounded px-1.5 text-[11px] font-medium text-muted transition-colors hover:text-danger-text ${focusRing}`}
+          className={`h-6 rounded px-1.5 text-[13px] font-medium text-muted transition-colors hover:text-danger-text ${focusRing}`}
         >
           Limpiar
         </button>

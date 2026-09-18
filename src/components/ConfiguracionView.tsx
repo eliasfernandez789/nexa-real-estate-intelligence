@@ -13,7 +13,7 @@ import type { Perfil } from "@/lib/queries/perfil";
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
-const sectionLabel = "text-[10.5px] font-semibold uppercase tracking-wide text-muted";
+const sectionLabel = "text-[12.5px] font-semibold uppercase tracking-wide text-muted";
 const inputClass = `h-9 w-full rounded-lg border border-surface-border bg-background px-3 text-sm text-foreground placeholder:text-muted ${focusRing}`;
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -87,31 +87,31 @@ export function ConfiguracionView({ perfil }: { perfil: Perfil }) {
 
       <Section title="Perfil">
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-surface-border bg-background text-[13px] font-semibold">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-surface-border bg-background text-[15px] font-semibold">
             {perfil.iniciales}
           </div>
           <div className="min-w-0 flex-1">
-            <div className="truncate text-[14px] font-medium">{perfil.nombre}</div>
-            <div className="text-[12px] text-muted">{perfil.oficinaNombre}</div>
+            <div className="truncate text-[16px] font-medium">{perfil.nombre}</div>
+            <div className="text-[14px] text-muted">{perfil.oficinaNombre}</div>
           </div>
           <Badge variant={perfil.rol === "admin" ? "default" : "secondary"}>
             {perfil.rol === "admin" ? "Admin" : "Agente"}
           </Badge>
         </div>
-        <div className="border-t border-surface-border pt-3 text-[13px]">
+        <div className="border-t border-surface-border pt-3 text-[15px]">
           <span className="text-muted">Email · </span>
           <span className="font-mono">{perfil.email ?? "—"}</span>
         </div>
       </Section>
 
       <Section title="Contacto de WhatsApp">
-        <p className="text-[12.5px] leading-relaxed text-muted-light">
+        <p className="text-[14.5px] leading-relaxed text-muted-light">
           Este número es el que reciben los demás agentes al tocar &quot;WhatsApp&quot; en tus
           pedidos publicados.
         </p>
         <form action={guardarTelefono} className="flex flex-col gap-2">
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="telefonoWa" className="text-[13px] font-medium text-muted-light">
+            <label htmlFor="telefonoWa" className="text-[15px] font-medium text-muted-light">
               Número con código de país
             </label>
             <Input
@@ -127,12 +127,12 @@ export function ConfiguracionView({ perfil }: { perfil: Perfil }) {
             />
           </div>
           {telefonoError && (
-            <p className="rounded-lg bg-danger-bg px-3 py-2 text-[13px] text-danger-text">
+            <p className="rounded-lg bg-danger-bg px-3 py-2 text-[15px] text-danger-text">
               {telefonoError}
             </p>
           )}
           {telefonoOk && (
-            <p className="flex items-center gap-1.5 text-[12.5px] text-success-text">
+            <p className="flex items-center gap-1.5 text-[14.5px] text-success-text">
               <CheckCircle weight="fill" className="h-4 w-4" />
               Número actualizado.
             </p>
@@ -140,7 +140,7 @@ export function ConfiguracionView({ perfil }: { perfil: Perfil }) {
           <button
             type="submit"
             disabled={telefonoPending}
-            className={`self-start rounded-md bg-primary-btn px-3.5 py-1.5 text-[12.5px] font-medium text-primary-btn-text transition-[filter] duration-150 hover:brightness-110 disabled:opacity-60 ${focusRing}`}
+            className={`self-start rounded-md bg-primary-btn px-3.5 py-1.5 text-[14.5px] font-medium text-primary-btn-text transition-[filter] duration-150 hover:brightness-110 disabled:opacity-60 ${focusRing}`}
           >
             {telefonoPending ? "Guardando…" : "Guardar número"}
           </button>
@@ -151,7 +151,7 @@ export function ConfiguracionView({ perfil }: { perfil: Perfil }) {
         <form onSubmit={cambiarPassword} className="flex flex-col gap-3">
           <div className="grid grid-cols-2 gap-3">
             <div className="flex flex-col gap-1.5">
-              <label className="text-[13px] font-medium text-muted-light">Nueva contraseña</label>
+              <label className="text-[15px] font-medium text-muted-light">Nueva contraseña</label>
               <input
                 type="password"
                 autoComplete="new-password"
@@ -165,7 +165,7 @@ export function ConfiguracionView({ perfil }: { perfil: Perfil }) {
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-[13px] font-medium text-muted-light">Confirmar</label>
+              <label className="text-[15px] font-medium text-muted-light">Confirmar</label>
               <input
                 type="password"
                 autoComplete="new-password"
@@ -180,12 +180,12 @@ export function ConfiguracionView({ perfil }: { perfil: Perfil }) {
             </div>
           </div>
           {passwordError && (
-            <p className="rounded-lg bg-danger-bg px-3 py-2 text-[13px] text-danger-text">
+            <p className="rounded-lg bg-danger-bg px-3 py-2 text-[15px] text-danger-text">
               {passwordError}
             </p>
           )}
           {passwordOk && (
-            <p className="flex items-center gap-1.5 text-[12.5px] text-success-text">
+            <p className="flex items-center gap-1.5 text-[14.5px] text-success-text">
               <CheckCircle weight="fill" className="h-4 w-4" />
               Contraseña actualizada.
             </p>
@@ -193,7 +193,7 @@ export function ConfiguracionView({ perfil }: { perfil: Perfil }) {
           <button
             type="submit"
             disabled={passwordPending || !password}
-            className={`self-start rounded-md bg-primary-btn px-3.5 py-1.5 text-[12.5px] font-medium text-primary-btn-text transition-[filter] duration-150 hover:brightness-110 disabled:opacity-60 ${focusRing}`}
+            className={`self-start rounded-md bg-primary-btn px-3.5 py-1.5 text-[14.5px] font-medium text-primary-btn-text transition-[filter] duration-150 hover:brightness-110 disabled:opacity-60 ${focusRing}`}
           >
             {passwordPending ? "Guardando…" : "Cambiar contraseña"}
           </button>

@@ -6,7 +6,7 @@ export default async function ConfiguracionPage() {
 
   if (!perfil) {
     return (
-      <div className="mx-auto max-w-xl px-6 pt-10 text-center text-[13px] text-muted">
+      <div className="mx-auto max-w-xl px-6 pt-10 text-center text-[15px] text-muted">
         No se encontró tu perfil de agente. Contactá a un administrador.
       </div>
     );
